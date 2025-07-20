@@ -73,9 +73,9 @@ export const Footer: React.FC = () => {
                 Features
               </h4>
               <ul className={`text-sm space-y-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                <li>AI-Powered Recognition</li>
-                <li>Real-time 3D Visualization</li>
-                <li>Step-by-step Solutions</li>
+                <li>• AI-Powered Recognition</li>
+                <li>• Real-time 3D Visualization</li>
+                <li>• Step-by-step Solutions</li>
               </ul>
             </div>
             
@@ -84,9 +84,9 @@ export const Footer: React.FC = () => {
                 Technology
               </h4>
               <ul className={`text-sm space-y-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                <li>React + TypeScript</li>
-                <li>Firebase Authentication</li>
-                <li>Computer Vision</li>
+                <li>• React + TypeScript</li>
+                <li>• Firebase Authentication</li>
+                <li>• Computer Vision</li>
               </ul>
             </div>
             
@@ -95,9 +95,9 @@ export const Footer: React.FC = () => {
                 Support
               </h4>
               <ul className={`text-sm space-y-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                <li>User Guide</li>
-                <li>FAQ</li>
-                <li>Contact Us</li>
+                <li>• User Guide</li>
+                <li>• FAQ</li>
+                <li>• Contact Us</li>
               </ul>
             </div>
           </div>
