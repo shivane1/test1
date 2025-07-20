@@ -1,4 +1,71 @@
-return (
+import React, { useState, useEffect } from 'react';
+import { SolveStep } from '../types/cube';
+import { Play, Pause, SkipForward, SkipBack, RotateCw, Hand, HelpCircle, Clock } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
+
+interface SolverAnimationProps {
+  steps: SolveStep[];
+  onStepChange: (step: number) => void;
+}
+
+export const SolverAnimation: React.FC<SolverAnimationProps> = ({ steps, onStepChange }) => {
+  const { isDark } = useTheme();
+  const [currentStep, setCurrentStep] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [speed, setSpeed] = useState(1000); // milliseconds per step
+  const [showHandGuide, setShowHandGuide] = useState(true);
+
+  const startAnimation = () => {
+    if (currentStep >= steps.length - 1) {
+      setCurrentStep(0);
+      onStepChange(0);
+    }
+    setIsPlaying(true);
+  };
+
+  const pauseAnimation = () => {
+    setIsPlaying(false);
+  };
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    
+    if (isPlaying && currentStep < steps.length - 1) {
+      interval = setInterval(() => {
+        setCurrentStep(prev => {
+          const next = prev + 1;
+          onStepChange(next);
+          return next;
+        });
+      }, speed);
+    } else if (currentStep >= steps.length - 1) {
+      setIsPlaying(false);
+    }
+
+    return () => clearInterval(interval);
+  }, [isPlaying, currentStep, steps.length, speed, onStepChange]);
+
+  const handleStepForward = () => {
+    if (currentStep < steps.length - 1) {
+      const next = currentStep + 1;
+      setCurrentStep(next);
+      onStepChange(next);
+    }
+  };
+
+  const handleStepBack = () => {
+    if (currentStep > 0) {
+      const prev = currentStep - 1;
+      setCurrentStep(prev);
+      onStepChange(prev);
+    }
+  };
+
+  const currentStepData = steps[currentStep];
+  
+  if (!currentStepData) return null;
+
+  return (
     <div className={`${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-xl shadow-lg border p-6`}>
       <div className="flex items-center justify-between mb-6">
         <div>
@@ -149,3 +216,4 @@ return (
       </div>
     </div>
   );
+};
